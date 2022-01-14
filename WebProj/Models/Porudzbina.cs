@@ -11,13 +11,13 @@ namespace WebProj.Models
         [Column("IDPorudzbine")]
         public int IDPorudzbine {get; set;}
 
-        [Column("Deserti")]
-        [MaxLength(255)]
-        public string Deserti{get; set;}
-
         [Column("Pice")]
         [MaxLength(255)]
         public string Pice{get; set;}
+
+        [Column("Deserti")]
+        [MaxLength(255)]
+        public string Deserti{get; set;}
 
         [JsonIgnore]
         public KoktelBar KoktelBar {get; set;}
