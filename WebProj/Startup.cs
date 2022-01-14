@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using WebProj.Models;
 
 namespace WebProj
 {
@@ -26,12 +28,17 @@ namespace WebProj
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            // OVDE TRB DA SE DODA CORS !!!
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebProj", Version = "v1" });
             });
+
+            services.AddDbContext<KoktelBarContext>(options => {
+                options.UseSqlServer(Configuration.GetConnectionString("KokteliCS"));
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +54,8 @@ namespace WebProj
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            // CORS !!! 
 
             app.UseAuthorization();
 
