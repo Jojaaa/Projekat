@@ -29,6 +29,18 @@ namespace WebProj
         public void ConfigureServices(IServiceCollection services)
         {
             // OVDE TRB DA SE DODA CORS !!!
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CORS",builder =>
+                {
+                    builder.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins(new string[]
+                    {
+                        "http://127.0.0.1:5501"
+                    });
+                });
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -56,6 +68,7 @@ namespace WebProj
             app.UseRouting();
 
             // CORS !!! 
+            app.UseCors("CORS");
 
             app.UseAuthorization();
 
