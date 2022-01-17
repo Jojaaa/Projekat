@@ -16,8 +16,8 @@ namespace WebProj.Models
 
         
         [Column("Naziv")]
-        [MaxLength(255)] 
-          public string Naziv {get; set;}
+        [MaxLength(50)] 
+        public string Naziv {get; set;}
 
         [Column("Adresa")]
         public string Adresa {get; set;}

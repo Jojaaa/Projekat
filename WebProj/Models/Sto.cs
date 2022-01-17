@@ -15,7 +15,7 @@ namespace WebProj.Models
         public int BrojStola{get; set;}
 
         [Column("Stanje")]
-        [MaxLength(255)]
+        [MaxLength(10)]
         public string Stanje{ get; set;}
 
         [Column("MaxKapacitet")]
@@ -25,11 +25,11 @@ namespace WebProj.Models
         public int KapacitetStola{get; set;}
 
         [Column("Ime")]
-        [MaxLength(255)]
+        [MaxLength(30)]
         public string Ime{get; set;}
 
         [Column("Prezime")]
-        [MaxLength(255)]
+        [MaxLength(30)]
         public string Prezime{get; set;}
 
         [JsonIgnore]

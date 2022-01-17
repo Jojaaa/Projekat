@@ -18,9 +18,9 @@ export class Sto{
 
     vratiStanje(){
         if(this.stanje==="slobodan")
-            return "rgb(255,255,255)";
+            return "rgb(255, 255, 255)";
         else
-            return "rgb(168, 117, 164)";
+            return "rgb(0, 117, 164)";
 
     }
 
@@ -29,7 +29,7 @@ export class Sto{
            throw new Exception ("Roditeljski element ne postoji!");
         this.stoKontejner=document.createElement("div");
         this.stoKontejner.className="stoKontejner";
-        this.stoKontejner.innerHTML=this.rbr + "\n" +"\n slobodan";
+        this.stoKontejner.innerHTML= this.rbr + "<br>" +" slobodan";
         this.stoKontejner.style.backgroundColor=this.vratiStanje();
         host.appendChild(this.stoKontejner);
 
@@ -40,7 +40,7 @@ export class Sto{
            throw new Exception ("Roditeljski element ne postoji!");
         this.stoKontejner=document.createElement("div");
         this.stoKontejner.className="stoKontejner";
-        this.stoKontejner.innerHTML= this.rbr + "\n" +"\n zauzet";
+        this.stoKontejner.innerHTML= this.rbr + "<br>" +" zauzet";
         this.stoKontejner.style.backgroundColor=this.vratiStanje();
         this.kliknuto(this.rbr,this.ime,this.prezime);
         host.appendChild(this.stoKontejner);

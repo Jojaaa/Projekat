@@ -1,7 +1,7 @@
 import {Sto} from "./sto.js";
 import {Porudzbina} from "./porudzbina.js"; 
 
-export class KoktelBar{
+export class KoktelBar {
     constructor(id,naziv,adresa,kapacitet,maxljudi,maxlokala){
         this.id=id;
         this.naziv=naziv;
@@ -36,9 +36,14 @@ export class KoktelBar{
         host.appendChild(this.kontejner);
 
        
+        // let slika = document.createElement ("body");
+        // slika.className = "slika";
+        // document.body.appendChild(slika);
+
+
         let naslov=document.createElement("label");
         naslov.className="naslov";
-        naslov.innerHTML=` Koktel Bar ${this.naziv}`;
+        naslov.innerHTML=` ${this.naziv}`;
         this.kontejner.appendChild(naslov);
 
         let divZaElemente=document.createElement("div");
@@ -48,7 +53,7 @@ export class KoktelBar{
 
         let dugme=document.createElement("button");
         dugme.className="dugmeUcitaj";
-        dugme.innerHTML="Vidi lokal";
+        dugme.innerHTML="vidi lokal";
         
         this.kontejner.appendChild(dugme);
        
@@ -166,21 +171,6 @@ export class KoktelBar{
           let deserti = ["","Macarons", "Cupcake", "Cheesecake", "Torta - parče" ,"Voćna salata"];
           let pice = ["", "Margarita", "Blue Lagoon", "Cosmopolitan", "Mojito", "Pina Colada", "Sex On The Beach", "Voda", "Sok", "Limunada", "Pivo", "Ledeni caj"];
   
-          let selD= document.createElement("select");
-          selD.className = "selektovanje";
-          labela = document.createElement("label");
-          labela.innerHTML="Deserti ";
-          labela.className = "labele"
-          kontForma2.appendChild(labela);
-          kontForma2.appendChild(selD);
-  
-          for(let i=0; i<8;i++){
-              let opcija=document.createElement("option");
-              opcija.innerHTML=deserti[i];
-              opcija.value=deserti[i];
-              selD.appendChild(opcija);
-          }
-  
           let selP= document.createElement("select");
           selP.className = "selektovanje";
           labela = document.createElement("label");
@@ -189,14 +179,32 @@ export class KoktelBar{
           kontForma2.appendChild(labela);
           kontForma2.appendChild(selP);
   
-          for(let i=0; i<7;i++){
+          for(let i=0; i<12;i++){
               let opcija=document.createElement("option");
               
               opcija.innerHTML=pice[i];
               opcija.value=pice[i];
               selP.appendChild(opcija);
           }
+  
 
+
+          let selD= document.createElement("select");
+          selD.className = "selektovanje";
+          labela = document.createElement("label");
+          labela.innerHTML="Deserti ";
+          labela.className = "labele"
+          kontForma2.appendChild(labela);
+          kontForma2.appendChild(selD);
+  
+          for(let i=0; i<6;i++){
+              let opcija=document.createElement("option");
+              opcija.innerHTML=deserti[i];
+              opcija.value=deserti[i];
+              selD.appendChild(opcija);
+          }
+  
+          
 
           //dugme za rezervaciju stola
           let dugme=document.createElement("buttton");
@@ -258,9 +266,6 @@ export class KoktelBar{
                         console.log(this.stolovi[brojStola.value]);
                         this.stolovi[brojStola.value].zauzmiSto(brojStola.value,brojLjudi.value);
                         this.stolovi[brojStola.value].kliknuto(brojStola.value,ime.value,prezime.value);
-                       
-                        
-                       
                         
                     }
                     else if(p.status==406){
