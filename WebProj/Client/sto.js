@@ -18,9 +18,9 @@ export class Sto{
 
     vratiStanje(){
         if(this.stanje==="slobodan")
-            return "rgb(255, 255, 255)";
+            return "rgb(212, 201, 179)";
         else
-            return "rgb(0, 117, 164)";
+            return "rgb(255, 174, 0)";
 
     }
 
@@ -49,12 +49,12 @@ export class Sto{
 
     zauzmiSto(brojStola, brojLjudi){
         if(this.stanje==="zauzet" || this.maxKapacitet<=brojLjudi)
-            alert("Sto je vec rezervisan!");
+            alert("Sto je rezervisan!");
         else{
             this.rbr=brojStola;
             this.kapacitet=brojLjudi;
             this.stanje="zauzet";
-            this.stoKontejner.innerHTML= "Sto:" + this.rbr +"\n je" + "\t zauzet";
+            this.stoKontejner.innerHTML=  this.rbr + "<br> zauzet";
             this.stoKontejner.style.backgroundColor=this.vratiStanje(); 
         }
     }
@@ -63,19 +63,17 @@ export class Sto{
     oslobodiSto(rbr){
         this.stanje="slobodan";
         this.kapacitet=0;
-        this.stoKontejner.innerHTML=rbr + "\n" +"\n slobodan";
+        this.stoKontejner.innerHTML=rbr + "<br>" +"<br> slobodan";
         this.stoKontejner.style.backgroundColor=this.vratiStanje();
 
     }
 
     izmeniSto(rbr, br, ime, prezime){
         this.rbr=rbr;
-        this.kapacitet +=parseInt(br);
+        this.kapacitet += parseInt(br);
         this.ime=ime;
         this.prezime=prezime;
-        this.stoKontejner.innerHTML= "Sto :" +  this.rbr +"\n je" + "\t zauzet";
-
-
+        this.stoKontejner.innerHTML= this.rbr + "<br> zauzet";
     }
 
 
@@ -97,7 +95,7 @@ export class Sto{
     {
         this.stoKontejner.addEventListener("click", () => {
             //confirm(`Sto broj ${rbr} je zauzeo/la ${i} ${p}`);
-            confirm("Sto broj" + rbr + " "+ "je zauzeo/la"+ " "+ i + " "+ p);
+            confirm("Sto broj " + rbr + " je zauzeo/la → " + i + " " + p);
         });
 
     }

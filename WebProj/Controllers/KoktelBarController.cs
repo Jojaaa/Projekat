@@ -18,8 +18,9 @@ namespace WebProj.Controllers{
         [HttpGet]
         public async Task<List<KoktelBar>> PreuzmiKoktelBar()
         {
-            //return await Context.Poslasticare.ToListAsync();
-            return await Context.KBarovi.Include(p=>p.Stolovi).Include(p=>p.Porudzbine).ToListAsync();
+            return await Context.KBarovi.Include(p=>p.Stolovi)
+                                        .Include(p=>p.Porudzbine)
+                                        .ToListAsync();
         }
 
         [Route("UpisiKoktelBar")]
@@ -52,6 +53,7 @@ namespace WebProj.Controllers{
         [HttpPost]
         public async Task<IActionResult>  ZauzmiSto(int id, [FromBody] Sto sto)
         {
+            
             var kBar= await Context.KBarovi.FindAsync(id);
             sto.KoktelBar=kBar;
             var sto_pret= await Context.Stolovi.Where(s=> s.BrojStola==sto.BrojStola && s.KoktelBar.ID==id).FirstOrDefaultAsync();
@@ -78,9 +80,16 @@ namespace WebProj.Controllers{
             var sto= await Context.Stolovi.Where(s=> s.BrojStola==br && s.KoktelBar.ID==id).FirstOrDefaultAsync();
             Context.Stolovi.Remove(sto);
             await Context.SaveChangesAsync();
-
-            
         }
+
+        // [Route("OslobodiSto/{br}/{id}")]
+        // [HttpDelete]
+        // public async Task OslobodiSto(int br, int id)
+        // {
+        //     var sto= await Context.Stolovi.Where(s=> s.BrojStola==br && s.KoktelBar.ID==null).FirstOrDefaultAsync();
+        //     Context.Stolovi.Remove(sto);
+        //     await Context.SaveChangesAsync();
+        // }
 
 
         [Route("IzmeniSto/{br}/{ime}/{prezime}/{brljudi}")]
@@ -99,47 +108,45 @@ namespace WebProj.Controllers{
         [HttpPost]
         public async Task DodajPorudzbinu(int id, [FromBody]Porudzbina por)
         {
-            var kBar=await Context.KBarovi.FindAsync(id);
-            por.KoktelBar=kBar;
+            var kBar = await Context.KBarovi.FindAsync(id);
+            por.KoktelBar = kBar;
             Context.Porudzbine.Add(por);
             await Context.SaveChangesAsync();
         }
 
-      [Route("OtkaziPorudzbinu/{br}")]
-      [HttpDelete]
-      public async Task OtkaziPorudzbinu(int br)
-      {
-          var por= await Context.Porudzbine.Where(p=>p.IDPorudzbine==br).FirstOrDefaultAsync();
-          Context.Porudzbine.Remove(por);
-         await Context.SaveChangesAsync();
+        [Route("OtkaziPorudzbinu/{br}")]
+        [HttpDelete]
+        public async Task OtkaziPorudzbinu(int br)
+        {
+            var por= await Context.Porudzbine.Where(p=>p.IDPorudzbine==br).FirstOrDefaultAsync();
+            Context.Porudzbine.Remove(por);
+            await Context.SaveChangesAsync();
 
-      }
+        }
 
-      [Route("IzmeniPorudzbinu/{br}/{deserti}/{pice}")]
-      [HttpPut]
-      public async Task IzmeniPorudzbinu(int br, string deserti, string pice)
-      {
-          var por= await Context.Porudzbine.Where(p=>p.IDPorudzbine==br).FirstOrDefaultAsync();
-          por.Deserti=deserti;
-          por.Pice=pice;
-          await Context.SaveChangesAsync();
-      }
+        [Route("IzmeniPorudzbinu/{br}/{deserti}/{pice}")]
+        [HttpPut]
+        public async Task IzmeniPorudzbinu(int br, string deserti, string pice)
+        {
+            var por= await Context.Porudzbine.Where(p=>p.IDPorudzbine==br).FirstOrDefaultAsync();
+            por.Deserti=deserti;
+            por.Pice=pice;
+            await Context.SaveChangesAsync();
+        }
 
-       [Route("PreuzmiStolove/{idStola}")]
-       [HttpGet]
+        [Route("PreuzmiStolove/{idStola}")]
+        [HttpGet]
         public async Task<List<Sto>> PreuzmiStolove(int id)
         {
             return await Context.Stolovi.Where(sto=>sto.KoktelBar.ID==id).ToListAsync();
         }
 
         [Route("PreuzmiStolove1")]
-         [HttpGet]
+        [HttpGet]
         public async Task<List<Sto>> PreuzmiStolove1()
         {
             return await Context.Stolovi.ToListAsync();
         }
-
-    
         
     }
 }

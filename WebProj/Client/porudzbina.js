@@ -6,6 +6,7 @@ export class Porudzbina{
         this.id=id;
         this.deserti=deserti;
         this.pice=pice;
+
         this.kontejnerPoruci=null;
 
     }
@@ -24,15 +25,18 @@ export class Porudzbina{
 
     izmeniNarudzbinu(deserti, pice)
     {
-        this.deserti= deserti;
         this.pice = pice;
+        this.deserti= deserti;
+        alert("Izmena uspesna!");
+        
     }
 
     otkaziNarudzbinu()
     {
         this.id = 0;
-        this.deserti = "";
         this.pice = "";
+        this.deserti = "";
+        alert("Uspensno otkazano!");
     }
 
 }

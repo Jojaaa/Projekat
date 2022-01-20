@@ -12,6 +12,7 @@ export class KoktelBar {
         this.kontejner=null; //crtanje koktel bara
         this.maxljudi=maxljudi;
         this.maxlokala=maxlokala;
+
     }
 
     dodajSto(sto){
@@ -35,16 +36,12 @@ export class KoktelBar {
         console.log(this.kontejner);
         host.appendChild(this.kontejner);
 
-       
-        // let slika = document.createElement ("body");
-        // slika.className = "slika";
-        // document.body.appendChild(slika);
-
 
         let naslov=document.createElement("label");
         naslov.className="naslov";
         naslov.innerHTML=` ${this.naziv}`;
         this.kontejner.appendChild(naslov);
+
 
         let divZaElemente=document.createElement("div");
         divZaElemente.className="divZaElemente";
@@ -53,14 +50,11 @@ export class KoktelBar {
 
         let dugme=document.createElement("button");
         dugme.className="dugmeUcitaj";
-        dugme.innerHTML="vidi lokal";
-        
+        dugme.innerHTML="prikaži lokal";
         this.kontejner.appendChild(dugme);
        
-        
-        
     
-       var count=1;
+       var count=0;
 
         dugme.addEventListener("click",()=>
         {
@@ -68,7 +62,7 @@ export class KoktelBar {
            var btn=this.kontejner.querySelector(".dugmeUcitaj");
            if(count>=this.maxlokala){
                btn.disabled=true;
-               alert("Dostignut maksimalni kapacitet lokala/nivoa ovog bara!")
+               alert("Dostignut maksimalan br. lokala ovog bara!")
 
            }
            else{
@@ -92,8 +86,9 @@ export class KoktelBar {
           
 
         var kontForma1 = document.createElement("div");
-        kontForma.appendChild(kontForma1);
         kontForma1.className = "kontForma";  
+        kontForma.appendChild(kontForma1);
+        
         
         //naslov
         var naslov = document.createElement("h3");
@@ -132,7 +127,7 @@ export class KoktelBar {
          kontForma1.appendChild(unos);
 
          //labela broj ljudi za stolom
-          labela = document.createElement("label");
+         labela = document.createElement("label");
          labela.innerHTML = "Broj ljudi za stolom"
          labela.className = "labele";  
          kontForma1.appendChild(labela);
@@ -229,18 +224,16 @@ export class KoktelBar {
 
             //const inputtip= this.kontejner.querySelector(`input[name='this.unos']:checked`);
 
-            let provera=this.stolovi.find(br=>br.brojStola==brojStola>this.kapacitet  && br.brojLjudi==brojLjudi)
+            // let provera=this.stolovi.find(br=>br.brojStola==brojStola>this.kapacitet  && br.brojLjudi==brojLjudi)
 
             if(brojStola.value>=this.kapacitet)
              
               alert("Ne postoji sto sa tim rednim brojem! Izaberite neki drugi sto!");
-            else if (brojLjudi.value>this.maxlokala) {
-              alert("Maksimalan broj ljudi za ovim stolom je:" + " "+ this.maxlokala);
+            else if (brojLjudi.value>this.maxljudi) {
+              alert("Maksimalan broj ljudi za ovim stolom je: "+ this.maxljudi);
                 
             }else {
                
-
-
                 console.log(brojStola.value);
                 console.log(brojLjudi.value);
                 console.log(ime.value);
@@ -269,7 +262,7 @@ export class KoktelBar {
                         
                     }
                     else if(p.status==406){
-                        alert("Sto je vec rezervisan!");
+                        alert("Sto je rezervisan!");
                     }
                 })
 
@@ -390,15 +383,15 @@ export class KoktelBar {
               alert("Ne postoji sto sa tim rednim brojem! Izaberite neki drugi sto!");
             else{
                 
-                fetch("https://localhost:5001/KoktelBar/DodaPorudzbinu/"+ this.id,{
+                fetch("https://localhost:5001/KoktelBar/DodajPorudzbinu/"+ this.id,{
                     method: "POST",
                     headers:{
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
                         id:br.value,
-                        deserti:desertici,
-                        pice:picence, // ispravljeno i ovo
+                        pice:picence,
+                        deserti:desertici 
                     })
                 }).then(p=>{
                     if(p.ok)
@@ -411,12 +404,9 @@ export class KoktelBar {
             this.kontejner.querySelector(".brojStola1").value= " ";
             selD.value=" ";
             selP.value=" ";
-            
-
+         
         }
 
-
-  
     }
 
     crtajStolove(host){
@@ -430,17 +420,15 @@ export class KoktelBar {
             var niz = [];
             var brel =0;
             data.forEach(sto=>{
-            //alert(poslasticara.naziv);
+            
             const sto1=new Sto(sto.brojStola,sto.stanje,sto.maxKapacitet,sto.kapacitetStola,sto.ime,sto.prezime);
-            //console.log(sto.idStola);
+            
             console.log(sto.brojStola);
            
                     niz[brel++]=sto.brojStola;
                     this.dodajSto(sto1);
                     sto1.crtajSto1(stolovi);
-                   
-  
-                
+        
             });
             for(let i =0;i<this.kapacitet;i++)
             {
@@ -461,7 +449,6 @@ export class KoktelBar {
 
                 }
             }
-            //OVO JE ISPRAVLJENO 
 
         });
     });

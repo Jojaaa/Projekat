@@ -35,8 +35,5 @@ namespace WebProj.Models
         [JsonIgnore]
         public KoktelBar KoktelBar {get; set;}
 
-
-        
-
     }
 }
