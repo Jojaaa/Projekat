@@ -27,8 +27,14 @@ namespace WebProj.Controllers{
         [HttpPost]
         public async Task UpisiKoktelBar([FromBody] KoktelBar kBar)
         {
-            Context.KBarovi.Add(kBar);
-            await Context.SaveChangesAsync();
+            if (kBar != null) {
+                Context.KBarovi.Add(kBar);
+                await Context.SaveChangesAsync();
+            }
+            else {
+                BadRequest("Bar nije pronadjen!");
+            }
+            
         }
 
         [Route("IzmeniKoktelBar")]
@@ -45,8 +51,14 @@ namespace WebProj.Controllers{
         public async Task IzbrisiKoktelBar(int id)
         {
             var kBar = await Context.KBarovi.FindAsync(id);
-            Context.KBarovi.Remove(kBar);
-            await Context.SaveChangesAsync();
+            if (kBar != null) {
+                Context.KBarovi.Remove(kBar);
+                await Context.SaveChangesAsync();
+            }
+            else {
+                BadRequest ("Bar nije pronadjen!");
+            }
+            
         }
 
         [Route("ZauzmiSto/{id}")]
@@ -55,11 +67,17 @@ namespace WebProj.Controllers{
         {
             
             var kBar= await Context.KBarovi.FindAsync(id);
-            sto.KoktelBar=kBar;
+            if (kBar != null) {
+                sto.KoktelBar=kBar;
+            }
+            else {
+                BadRequest ("Bar nije pronadjen!");
+            }
+
             var sto_pret= await Context.Stolovi.Where(s=> s.BrojStola==sto.BrojStola && s.KoktelBar.ID==id).FirstOrDefaultAsync();
             if(sto_pret!=null)
             {
-                 return StatusCode(406);
+                return StatusCode(406); // not acceptable
 
             }
             else{
@@ -78,8 +96,14 @@ namespace WebProj.Controllers{
         public async Task OslobodiSto(int br, int id)
         {
             var sto= await Context.Stolovi.Where(s=> s.BrojStola==br && s.KoktelBar.ID==id).FirstOrDefaultAsync();
-            Context.Stolovi.Remove(sto);
-            await Context.SaveChangesAsync();
+            if (sto != null) {
+                Context.Stolovi.Remove(sto);
+                await Context.SaveChangesAsync();
+            }
+            else {
+                BadRequest("Sto nije pronadjen!");
+            }
+            
         }
 
         // [Route("OslobodiSto/{br}/{id}")]
@@ -96,11 +120,17 @@ namespace WebProj.Controllers{
         [HttpPut]
         public async Task IzmeniSto(int br, string ime, string prezime, int brljudi)
         {
+            
             var sto= await Context.Stolovi.Where(s=> s.BrojStola==br).FirstOrDefaultAsync();
-            sto.Ime=ime;
-            sto.Prezime=prezime;
-            sto.KapacitetStola=brljudi;
-            await Context.SaveChangesAsync();
+            if (sto != null) {
+                sto.Ime=ime;
+                sto.Prezime=prezime;
+                sto.KapacitetStola=brljudi;
+                await Context.SaveChangesAsync();
+            }
+            else {
+                BadRequest("Sto nije pronadjen!");
+            }
 
         }
 
@@ -109,9 +139,15 @@ namespace WebProj.Controllers{
         public async Task DodajPorudzbinu(int id, [FromBody]Porudzbina por)
         {
             var kBar = await Context.KBarovi.FindAsync(id);
-            por.KoktelBar = kBar;
-            Context.Porudzbine.Add(por);
-            await Context.SaveChangesAsync();
+            if (kBar != null) {
+                por.KoktelBar = kBar;
+                Context.Porudzbine.Add(por);
+                await Context.SaveChangesAsync();
+            }
+            else {
+                BadRequest ("Bar nije pronadjen!");
+            }
+            
         }
 
         [Route("OtkaziPorudzbinu/{br}")]
@@ -119,8 +155,14 @@ namespace WebProj.Controllers{
         public async Task OtkaziPorudzbinu(int br)
         {
             var por= await Context.Porudzbine.Where(p=>p.IDPorudzbine==br).FirstOrDefaultAsync();
-            Context.Porudzbine.Remove(por);
-            await Context.SaveChangesAsync();
+            if (por != null) {
+                Context.Porudzbine.Remove(por);
+                await Context.SaveChangesAsync();
+            }
+            else {
+                BadRequest ("Porudzbina nije pronadjena!");
+            }
+            
 
         }
 
@@ -129,9 +171,15 @@ namespace WebProj.Controllers{
         public async Task IzmeniPorudzbinu(int br, string deserti, string pice)
         {
             var por= await Context.Porudzbine.Where(p=>p.IDPorudzbine==br).FirstOrDefaultAsync();
-            por.Deserti=deserti;
-            por.Pice=pice;
-            await Context.SaveChangesAsync();
+            if (por != null) {
+                por.Deserti=deserti;
+                por.Pice=pice;
+                await Context.SaveChangesAsync();
+            }
+            else {
+                BadRequest("Porudzbina nije pronadjena!");
+            }
+            
         }
 
         [Route("PreuzmiStolove/{idStola}")]

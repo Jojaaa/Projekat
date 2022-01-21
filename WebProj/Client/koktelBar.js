@@ -3,15 +3,48 @@ import {Porudzbina} from "./porudzbina.js";
 
 export class KoktelBar {
     constructor(id,naziv,adresa,kapacitet,maxljudi,maxlokala){
-        this.id=id;
-        this.naziv=naziv;
-        this.adresa=adresa;
-        this.kapacitet=kapacitet; //stolovi u jednom lokalu
+        this.id = id;
+        
+        if (naziv) {
+            this.naziv=naziv;
+        }
+        else {
+            this.naziv = "Default";
+        }
+
+        if (adresa) {
+            this.adresa = adresa;
+        }
+        else {
+            this.adresa = "Default";
+        }
+        
+        if (kapacitet) {
+            this.kapacitet = kapacitet;
+        }
+        else {
+            this.kapacitet = 10;  //stolovi u jednom lokalu
+        }
+
+        if (maxljudi) {
+            this.maxljudi = maxljudi;
+        }
+        else {
+            this.maxljudi = 5;
+        }
+
+        if (maxlokala) {
+            this.maxlokala = maxlokala;
+        }
+        else {
+            this.maxlokala = 2;
+        }
+
         this.stolovi=[];
         this.porudzbine=[];
-        this.kontejner=null; //crtanje koktel bara
-        this.maxljudi=maxljudi;
-        this.maxlokala=maxlokala;
+        
+        this.kontejner=null;  //crtanje koktel bara
+        
 
     }
 
@@ -304,7 +337,7 @@ export class KoktelBar {
                    
                     this.stolovi[brojStola].oslobodiSto(brojStola);
                     alert("Sto je sada slobodan!");
-                    location.reload();
+                    // location.reload();
                    
                     
                     
@@ -348,7 +381,7 @@ export class KoktelBar {
                    
                     this.stolovi[brojStola].izmeniSto(brojStola,brojLjudi,ime,prezime);
                     alert("Izmena je ucitana u bazu!");
-                    location.reload();
+                    // location.reload();
                     
                    
 
@@ -428,7 +461,7 @@ export class KoktelBar {
                     niz[brel++]=sto.brojStola;
                     this.dodajSto(sto1);
                     sto1.crtajSto1(stolovi);
-        
+
             });
             for(let i =0;i<this.kapacitet;i++)
             {

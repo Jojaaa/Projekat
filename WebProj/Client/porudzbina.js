@@ -4,8 +4,21 @@ import {Sto} from "./sto.js";
 export class Porudzbina{
     constructor(id, deserti , pice){
         this.id=id;
-        this.deserti=deserti;
-        this.pice=pice;
+
+        if (pice) {
+            this.pice = pice;
+        }
+        else {
+            this.pice = "Default";
+        }
+
+        if (deserti) {
+            this.deserti = deserti;
+        }
+        else {
+            this.deserti = "Default";
+        }
+        
 
         this.kontejnerPoruci=null;
 

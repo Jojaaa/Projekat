@@ -3,15 +3,45 @@ import {Porudzbina} from "./porudzbina.js";
 export class Sto{
 
     constructor(rbr,stanje,maxKapacitet,ime,prezime){
-        this.rbr=rbr;
-        this.stanje=stanje; // da li sto zauzet ili nije
-        this.maxKapacitet=maxKapacitet; // maksimalan broj ljudi za stolom
-        this.kapacitet=0; //koliko ima ljudi za stolom
-        this.ime=ime;
-        this.prezime=prezime;
+        
+        if (rbr) {
+            this.rbr = rbr;
+        }
+        else {
+            this.rbr = 0;
+        }
+        
+        if (stanje) {
+            this.stanje = stanje;
+        }
+        else {
+            this.stanje = "slobodan";  // da li je slobodan ili ne
+        }
+
+        if (maxKapacitet) {
+            this.maxKapacitet = maxKapacitet;
+        }
+        else {
+            this.maxKapacitet = 5;  // max ljudi za stolom
+        }
+        
+        this.kapacitet = 0; //koliko ima ljudi za stolom
+        
+        if (ime) {
+            this.ime = ime;
+        }
+        else {
+            this.ime = "Default";
+        }
+
+        if (prezime) {
+            this.prezime = prezime;
+        }
+        else {
+            this.prezime = "Default";
+        }        
         
         this.stoKontejner=null;
-
 
     }
 
@@ -63,7 +93,7 @@ export class Sto{
     oslobodiSto(rbr){
         this.stanje="slobodan";
         this.kapacitet=0;
-        this.stoKontejner.innerHTML=rbr + "<br>" +"<br> slobodan";
+        this.stoKontejner.innerHTML=rbr +"<br> slobodan";
         this.stoKontejner.style.backgroundColor=this.vratiStanje();
 
     }
