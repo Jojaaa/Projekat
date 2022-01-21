@@ -116,7 +116,7 @@ export class Sto{
             naruciDugme.innerHTML="Naručeno";
             this.stoKontejner.appendChild(naruciDugme);
             naruciDugme.onclick=(ev)=>{
-                alert("Broj narudžbine je:"+ nar.getID()+ "\n Naručen je desert :"+ nar.getDesert()+ "\n Naručeno je piće:"+ nar.getPice());
+                alert("Broj narudžbine je: "+ nar.getID() + "\n Naručeno je piće: "+ nar.getPice() + "\n Naručen je desert: "+ nar.getDesert());
             }
         }   
     }

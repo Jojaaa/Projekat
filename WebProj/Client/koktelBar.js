@@ -338,9 +338,6 @@ export class KoktelBar {
                     this.stolovi[brojStola].oslobodiSto(brojStola);
                     alert("Sto je sada slobodan!");
                     // location.reload();
-                   
-                    
-                    
                 }
             }).catch(err=>{
                 console.log(err);
@@ -380,11 +377,8 @@ export class KoktelBar {
                 if(resp.ok){
                    
                     this.stolovi[brojStola].izmeniSto(brojStola,brojLjudi,ime,prezime);
-                    alert("Izmena je ucitana u bazu!");
+                    alert("Izmena uspešna!");
                     // location.reload();
-                    
-                   
-
                 }
             }).catch(err=>{
                 console.log(err);
