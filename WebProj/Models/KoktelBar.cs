@@ -34,8 +34,8 @@ namespace WebProj.Models
 
 
 
-        public virtual List<Sto> Stolovi{get;set;}
-        public virtual List<Porudzbina> Porudzbine{get;set;}
+        public  List<Sto> Stolovi{get;set;}
+        public  List<Porudzbina> Porudzbine{get;set;}
 
         
 
