@@ -82,12 +82,11 @@ namespace WebProj.Controllers{
             }
             else{
                 Context.Stolovi.Add(sto);
+                // Context.Add(sto);
                 await Context.SaveChangesAsync();
                 return Ok();
             }
-            
-            //Context.Stolovi.Add(sto);
-            //await Context.SaveChangesAsync();
+
 
         }
 
